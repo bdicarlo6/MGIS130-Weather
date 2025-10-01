@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +10,7 @@
     <div class="container">
         <header>
             <h1>🌤️ Weather Dashboard</h1>
-            <p class="subtitle">Get current weather conditions for any city</p>
+            <p class="subtitle" id="greeting">Get current weather conditions for any city</p>
         </header>
 
         <!-- USER INTERFACE LAYER: Search Section -->
@@ -24,6 +25,15 @@
                     <span class="btn-text">Search</span>
                     <span class="btn-icon">🔍</span>
                 </button>
+                <button id="locationBtn" title="Use my location">
+                    <span class="btn-icon">📍</span>
+                </button>
+            </div>
+
+            <!-- Search History -->
+            <div id="searchHistory" class="search-history">
+                <p class="history-label">Recent Searches:</p>
+                <div id="historyButtons" class="history-buttons"></div>
             </div>
         </div>
 
@@ -39,7 +49,7 @@
         <!-- Initial Message -->
         <div id="initialMessage" class="initial-message">
             <div class="icon">☁️</div>
-            <p>Enter a city name to get started</p>
+            <p>Enter a city name or use your location to get started</p>
         </div>
 
         <!-- USER INTERFACE LAYER: Weather Display Card -->
@@ -66,8 +76,10 @@
                 </div>
                 
                 <div class="feels-like" id="feelsLike"></div>
+                <div class="temp-range" id="tempRange"></div>
             </div>
 
+            <!-- Extended Weather Details -->
             <div class="weather-details">
                 <div class="detail-item">
                     <div class="detail-icon">💧</div>
@@ -83,7 +95,55 @@
                         <div class="detail-value" id="windSpeed"></div>
                     </div>
                 </div>
+                <div class="detail-item">
+                    <div class="detail-icon">🌅</div>
+                    <div>
+                        <div class="detail-label">Sunrise</div>
+                        <div class="detail-value" id="sunrise"></div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon">🌇</div>
+                    <div>
+                        <div class="detail-label">Sunset</div>
+                        <div class="detail-value" id="sunset"></div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon">🔽</div>
+                    <div>
+                        <div class="detail-label">Pressure</div>
+                        <div class="detail-value" id="pressure"></div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon">👁️</div>
+                    <div>
+                        <div class="detail-label">Visibility</div>
+                        <div class="detail-value" id="visibility"></div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon">☁️</div>
+                    <div>
+                        <div class="detail-label">Cloud Cover</div>
+                        <div class="detail-value" id="cloudCover"></div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon">🧭</div>
+                    <div>
+                        <div class="detail-label">Wind Direction</div>
+                        <div class="detail-value" id="windDirection"></div>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <!-- 5-DAY FORECAST SECTION -->
+        <div id="forecastSection" class="forecast-section">
+            <h3 class="forecast-title">5-Day Forecast</h3>
+            <div id="forecastContainer" class="forecast-container"></div>
         </div>
     </div>
 

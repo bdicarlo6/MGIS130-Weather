@@ -1,4 +1,4 @@
-/* USER INTERFACE LAYER: Enhanced Styling with Animations */
+/* USER INTERFACE LAYER: Enhanced Styling with All Features */
 
 * {
     margin: 0;
@@ -76,7 +76,7 @@ body.foggy {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
     position: relative;
     z-index: 10;
@@ -152,8 +152,8 @@ h1 {
     transform: translateY(-2px);
 }
 
-#searchBtn {
-    padding: 12px 30px;
+#searchBtn, #locationBtn {
+    padding: 12px 24px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
@@ -169,7 +169,11 @@ h1 {
     gap: 8px;
 }
 
-#searchBtn::before {
+#locationBtn {
+    padding: 12px 20px;
+}
+
+#searchBtn::before, #locationBtn::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -182,17 +186,17 @@ h1 {
     transition: width 0.6s, height 0.6s;
 }
 
-#searchBtn:hover {
+#searchBtn:hover, #locationBtn:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
 }
 
-#searchBtn:active::before {
+#searchBtn:active::before, #locationBtn:active::before {
     width: 300px;
     height: 300px;
 }
 
-#searchBtn:disabled {
+#searchBtn:disabled, #locationBtn:disabled {
     background: #ccc;
     cursor: not-allowed;
     transform: none;
@@ -200,6 +204,46 @@ h1 {
 
 .btn-icon {
     font-size: 1.1em;
+}
+
+/* Search History */
+.search-history {
+    margin-top: 15px;
+    display: none;
+}
+
+.search-history.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.history-label {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.history-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.history-btn {
+    padding: 6px 12px;
+    background: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    font-size: 0.9em;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.history-btn:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
 }
 
 .weather-card {
@@ -323,10 +367,16 @@ h1 {
     animation: fadeIn 0.5s ease 0.2s both;
 }
 
+.temp-range {
+    color: #666;
+    margin-top: 5px;
+    font-size: 0.95em;
+}
+
 .weather-details {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
     padding-top: 20px;
     border-top: 2px solid #f0f0f0;
 }
@@ -335,7 +385,7 @@ h1 {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 15px;
+    padding: 12px;
     background: #f8f9fa;
     border-radius: 10px;
     transition: all 0.3s ease;
@@ -348,18 +398,91 @@ h1 {
 }
 
 .detail-icon {
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 .detail-label {
     color: #666;
-    font-size: 0.9em;
+    font-size: 0.85em;
 }
 
 .detail-value {
-    font-size: 1.3em;
+    font-size: 1.1em;
     font-weight: 600;
     color: #333;
+}
+
+/* 5-Day Forecast Section */
+.forecast-section {
+    margin-top: 30px;
+    display: none;
+    animation: fadeIn 0.6s ease;
+}
+
+.forecast-section.show {
+    display: block;
+}
+
+.forecast-title {
+    color: white;
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.forecast-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+}
+
+.forecast-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    animation: scaleIn 0.5s ease;
+}
+
+.forecast-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.forecast-day {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.forecast-icon {
+    font-size: 3em;
+    margin: 10px 0;
+}
+
+.forecast-temp {
+    color: #666;
+    font-size: 0.95em;
+}
+
+.forecast-temp-high {
+    font-weight: bold;
+    color: #FF6B6B;
+}
+
+.forecast-temp-low {
+    color: #4ECDC4;
+}
+
+.forecast-desc {
+    font-size: 0.85em;
+    color: #999;
+    text-transform: capitalize;
+    margin-top: 5px;
 }
 
 .error-message {
@@ -458,12 +581,16 @@ h1 {
         flex-direction: column;
     }
 
-    #searchBtn {
+    #searchBtn, #locationBtn {
         width: 100%;
         justify-content: center;
     }
 
     .temp-toggle-container {
         flex-direction: row;
+    }
+
+    .forecast-container {
+        grid-template-columns: 1fr;
     }
 }
