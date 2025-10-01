@@ -20,7 +20,10 @@
                     id="cityInput" 
                     placeholder="Enter city name (e.g., London, Tokyo, New York)"
                 >
-                <button id="searchBtn">Search</button>
+                <button id="searchBtn">
+                    <span class="btn-text">Search</span>
+                    <span class="btn-icon">🔍</span>
+                </button>
             </div>
         </div>
 
@@ -28,7 +31,10 @@
         <div id="errorMessage" class="error-message"></div>
 
         <!-- Loading State -->
-        <div id="loading" class="loading">⏳ Loading weather data...</div>
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading weather data...</p>
+        </div>
 
         <!-- Initial Message -->
         <div id="initialMessage" class="initial-message">
@@ -48,7 +54,17 @@
 
             <div class="temperature">
                 <div class="temp-value" id="temperature"></div>
-                <button id="tempToggle" class="temp-toggle">Switch to °C</button>
+                
+                <!-- Enhanced Temperature Toggle Button -->
+                <div class="temp-toggle-container">
+                    <button id="tempToggleFahrenheit" class="temp-toggle-btn active">
+                        °F
+                    </button>
+                    <button id="tempToggleCelsius" class="temp-toggle-btn">
+                        °C
+                    </button>
+                </div>
+                
                 <div class="feels-like" id="feelsLike"></div>
             </div>
 
@@ -70,6 +86,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Weather particles container -->
+    <div id="weatherParticles" class="weather-particles"></div>
 
     <script src="script.js"></script>
 </body>

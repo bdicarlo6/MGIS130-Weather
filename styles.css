@@ -1,4 +1,4 @@
-/* USER INTERFACE LAYER: Styling */
+/* USER INTERFACE LAYER: Enhanced Styling with Animations */
 
 * {
     margin: 0;
@@ -11,17 +11,93 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     padding: 20px;
+    transition: background 0.8s ease;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Dynamic Background Classes */
+body.clear-sky {
+    background: linear-gradient(135deg, #FDB99B 0%, #F6D365 50%, #87CEEB 100%);
+}
+
+body.hot-weather {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%);
+}
+
+body.cold-weather {
+    background: linear-gradient(135deg, #E0F7FA 0%, #B3E5FC 50%, #81D4FA 100%);
+}
+
+body.cloudy {
+    background: linear-gradient(135deg, #757F9A 0%, #D7DDE8 100%);
+}
+
+body.rainy {
+    background: linear-gradient(135deg, #2C3E50 0%, #4CA1AF 100%);
+}
+
+body.snowy {
+    background: linear-gradient(135deg, #E6F7FF 0%, #FFFFFF 50%, #D4E9F7 100%);
+}
+
+body.thunderstorm {
+    background: linear-gradient(135deg, #2C3E50 0%, #3D4E5C 50%, #1A1A2E 100%);
+}
+
+body.foggy {
+    background: linear-gradient(135deg, #ADB5BD 0%, #CED4DA 50%, #E9ECEF 100%);
+}
+
+/* Weather Particles */
+.weather-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
 }
 
 .container {
     max-width: 600px;
     margin: 0 auto;
+    position: relative;
+    z-index: 10;
 }
 
 header {
     text-align: center;
     color: white;
     margin-bottom: 30px;
+    animation: fadeInDown 0.6s ease;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 h1 {
@@ -41,6 +117,18 @@ h1 {
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     margin-bottom: 30px;
+    animation: fadeIn 0.6s ease 0.2s both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .search-box {
@@ -54,33 +142,64 @@ h1 {
     border: 2px solid #e0e0e0;
     border-radius: 8px;
     font-size: 16px;
-    transition: border-color 0.3s;
+    transition: all 0.3s ease;
 }
 
 #cityInput:focus {
     outline: none;
     border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
 }
 
 #searchBtn {
     padding: 12px 30px;
-    background: #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#searchBtn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
 }
 
 #searchBtn:hover {
-    background: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+#searchBtn:active::before {
+    width: 300px;
+    height: 300px;
 }
 
 #searchBtn:disabled {
     background: #ccc;
     cursor: not-allowed;
+    transform: none;
+}
+
+.btn-icon {
+    font-size: 1.1em;
 }
 
 .weather-card {
@@ -89,6 +208,18 @@ h1 {
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     display: none;
+    animation: scaleIn 0.5s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .weather-card.show {
@@ -115,6 +246,16 @@ h1 {
     text-align: center;
     font-size: 5em;
     margin: 20px 0;
+    animation: bounce 2s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 .description {
@@ -134,25 +275,52 @@ h1 {
     font-size: 4em;
     font-weight: bold;
     color: #333;
+    animation: fadeIn 0.5s ease;
 }
 
-.temp-toggle {
-    background: none;
-    border: none;
-    color: #667eea;
+/* Enhanced Temperature Toggle Buttons */
+.temp-toggle-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.temp-toggle-btn {
+    padding: 8px 20px;
+    background: #f0f0f0;
+    color: #666;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 0.9em;
-    text-decoration: underline;
-    margin-top: 10px;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-.temp-toggle:hover {
-    color: #5568d3;
+.temp-toggle-btn:hover {
+    background: #e8e8e8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.temp-toggle-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.temp-toggle-btn:active {
+    transform: scale(0.95);
 }
 
 .feels-like {
     color: #666;
     margin-top: 10px;
+    animation: fadeIn 0.5s ease 0.2s both;
 }
 
 .weather-details {
@@ -167,6 +335,16 @@ h1 {
     display: flex;
     align-items: center;
     gap: 10px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+    background: #e9ecef;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .detail-icon {
@@ -192,6 +370,13 @@ h1 {
     margin-bottom: 20px;
     border-left: 4px solid #c33;
     display: none;
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
 }
 
 .error-message.show {
@@ -203,10 +388,27 @@ h1 {
     color: white;
     font-size: 1.2em;
     display: none;
+    padding: 20px;
 }
 
 .loading.show {
     display: block;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 15px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .initial-message {
@@ -215,11 +417,22 @@ h1 {
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     text-align: center;
+    animation: fadeIn 0.6s ease 0.4s both;
 }
 
 .initial-message .icon {
     font-size: 4em;
     margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
 }
 
 .initial-message p {
@@ -247,5 +460,10 @@ h1 {
 
     #searchBtn {
         width: 100%;
+        justify-content: center;
+    }
+
+    .temp-toggle-container {
+        flex-direction: row;
     }
 }
